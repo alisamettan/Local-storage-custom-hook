@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import axios from "axios";
+import { API } from "./api/api";
 
 export const queryClient = new QueryClient();
 
@@ -12,18 +13,13 @@ function App() {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    // app componentinin did mount
-    // tüm uygulama çalıştırıldı ve yüklendi
-    // Sadece 1 kere çalışır
-    console.warn("APP DID MOUNT! UYGULAMA YÜKLENDİ!");
-
-    toast.error("Sayfama hoşgeldin!");
+    toast.success("Sayfama hoşgeldin!");
 
     const token = localStorage.getItem("token");
 
     if (token) {
       // auto login
-      axios
+      API
         .get("https://workintech-fe-ecommerce.onrender.com/verify", {
           headers: {
             Authorization: token,
@@ -46,7 +42,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Main userName={userName} setUserName={setUserName} />
       <ToastContainer position="bottom-center" />
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }
