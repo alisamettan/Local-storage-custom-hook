@@ -36,7 +36,10 @@ const ProductPage = () => {
   }, [filterText, products]);
 
   useEffect(() => {
-    getProducts(GetProductsArguments());
+    getProducts({
+      reqType: REQ_TYPES.GET,
+      endpoint: "products",
+    });
   }, []);
 
   return (
